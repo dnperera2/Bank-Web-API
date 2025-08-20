@@ -1,8 +1,10 @@
 package com.nemal.BankAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Transaction {
@@ -10,12 +12,13 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer transactionID;
-    private LocalDate transactionDate;
+    private LocalDateTime transactionDate;
     private double transactionAmount;
     private String transactionType;
 
     @ManyToOne
     @JoinColumn(name = "account_number", nullable = false)
+    @JsonIgnore
     private BankAccount bankAccount;
 
     public Transaction() {
@@ -29,11 +32,11 @@ public class Transaction {
         this.transactionID = transactionID;
     }
 
-    public LocalDate getTransactionDate() {
+    public LocalDateTime getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(LocalDate transactionDate) {
+    public void setTransactionDate(LocalDateTime transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -66,7 +69,7 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "transactionID=" + transactionID +
-                ", transactionDate=" + transactionDate +
+                ", transactionDateTime=" + transactionDate +
                 ", transactionAmount=" + transactionAmount +
                 ", transactionType='" + transactionType + '\'' +
                 ", bankAccount=" + bankAccount +

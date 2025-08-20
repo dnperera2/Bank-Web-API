@@ -1,4 +1,4 @@
-package com.nemal.BankAPI.service;
+package com.nemal.BankAPI.dto;
 
 public class ApiResponse {
     private String message;

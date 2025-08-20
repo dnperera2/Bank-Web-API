@@ -1,11 +1,13 @@
 package com.nemal.BankAPI.service;
 
+import aj.org.objectweb.asm.commons.Remapper;
 import com.nemal.BankAPI.model.BankAccount;
 import com.nemal.BankAPI.repo.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BankAccountService {
@@ -14,6 +16,8 @@ public class BankAccountService {
 
     @Autowired
     private BankAccountRepository bankAccountRepository;
+
+    // Account validity
 
     public String validateAccount(BankAccount bankAccount) {
 
@@ -35,6 +39,15 @@ public class BankAccountService {
         return null;
     }
 
+
+    // account exist or not
+    public boolean accountExists(String accountNumber) {
+        return bankAccountRepository.findByAccountNumber(accountNumber).isPresent();
+    }
+
+
+    // Create Account
+
     public BankAccount createBankAccount(BankAccount bankAccount) {
         bankAccount.setAccountBalance(0.0);
         return bankAccountRepository.save(bankAccount);
@@ -42,5 +55,10 @@ public class BankAccountService {
 
     public List<BankAccount> getAccounts() {
         return bankAccountRepository.findAll();
+    }
+
+    public Optional<Double> checkBalance(String accountNumber) {
+        return bankAccountRepository.findByAccountNumber(accountNumber)
+                .map(BankAccount::getAccountBalance);
     }
 }

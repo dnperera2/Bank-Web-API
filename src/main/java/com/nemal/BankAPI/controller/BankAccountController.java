@@ -1,5 +1,6 @@
 package com.nemal.BankAPI.controller;
 
+import com.nemal.BankAPI.dto.ApiResponse;
 import com.nemal.BankAPI.model.BankAccount;
 import com.nemal.BankAPI.service.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,14 @@ public class BankAccountController {
                         "account-number", createdAccount.getAccountNumber()
                 )
         );
+    }
 
+    //get balance
+    @GetMapping("/{accountNumber}/balance")
+    public ResponseEntity<?> getBalance(@PathVariable String accountNumber){
+        return bankAccountService.checkBalance(accountNumber)
+                .map(bal -> ResponseEntity.ok(new ApiResponse("Balance", bal)))
+                .orElse(ResponseEntity.badRequest().body(new ApiResponse("Invalid Account Number", null)));
     }
 
 }
