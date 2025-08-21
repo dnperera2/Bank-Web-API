@@ -42,9 +42,9 @@ public class TransactionService {
             });
     }
 
-    public Optional<BankAccount> withdraw(String accountNumber, TransactionRequest amount) {
+    public Optional<BankAccount> withdraw(String accountNumber, TransactionRequest amt) {
         return bankAccountRepository.findByAccountNumber(accountNumber).map(acc -> {
-            if (acc.getAccountBalance() - 500.0 < amount.getAmount()) {
+            if (acc.getAccountBalance() - 500.0 < amt.getAmount()) {
                 throw new RuntimeException("Insufficient balance (Min Balance RS 500 )");
             }
                 // Update account balance
