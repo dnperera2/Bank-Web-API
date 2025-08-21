@@ -52,6 +52,7 @@ public class BankAccountService {
         bankAccount.setAccountBalance(0.0);
         return bankAccountRepository.save(bankAccount);
     }
+// get accounts
 
     public List<BankAccount> getAccounts() {
         return bankAccountRepository.findAll();
