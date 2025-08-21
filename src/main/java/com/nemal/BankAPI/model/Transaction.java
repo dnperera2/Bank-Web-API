@@ -68,11 +68,11 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transaction{" +
-                "transactionID=" + transactionID +
-                ", transactionDateTime=" + transactionDate +
-                ", transactionAmount=" + transactionAmount +
-                ", transactionType='" + transactionType + '\'' +
-                ", bankAccount=" + bankAccount +
+                "transactionID =" + transactionID +
+                ", transactionDateTime =" + transactionDate +
+                ", transactionAmount =" + transactionAmount +
+                ", transactionType ='" + transactionType + '\'' +
+                ", bankAccount =" + bankAccount +
                 '}';
     }
 
